@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sobel-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sobel-app
+  template:
+    metadata:
+      labels:
+        app: sobel-app
+    spec:
+      containers:
+      - name: sobel-app
+        image: sobel-app:minikube # 替換為 minikube 或 microk8s
+        ports:
+        - containerPort: 5000
+        # 啟用 Dapr 側車
+        env:
+        - name: DAPR_HTTP_PORT
+          value: "3500"
+        - name: DAPR_GRPC_PORT
+          value: "50001"
+        - name: APP_PORT
+          value: "5000"
+
