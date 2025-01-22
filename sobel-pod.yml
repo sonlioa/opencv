@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: sobel-processor-pod
+  labels:
+    app: sobel
+spec:
+  containers:
+  - name: sobel-container
+    image: sobel-processor:latest
+    imagePullPolicy: Never
+    env:
+    - name: INPUT_VIDEO
+      value: "/data/input.mp4"  # 指定輸入影片檔案路徑
+    - name: OUTPUT_VIDEO
+      value: "/data/output.avi" # 指定輸出影片檔案路徑
+    volumeMounts:
+    - name: video-volume
+      mountPath: /data
+  volumes:
+  - name: video-volume
+    hostPath:
+      path: /mnt/data/videos # 主機上影片檔案的存放目錄
+      type: DirectoryOrCreate
+
