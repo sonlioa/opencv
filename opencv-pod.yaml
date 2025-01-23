@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: opencv-pod
+  labels:
+    app: opencv-app
+spec:
+  containers:
+  - name: opencv-container
+    image: python:3.9-slim  # 基礎映像
+    command: ["sleep", "infinity"]  # 避免容器啟動後立即退出
+    resources:
+      limits:
+        memory: "512Mi"
+        cpu: "1"
+      requests:
+        memory: "256Mi"
+        cpu: "0.5"
+    env:
+    - name: ENVIRONMENT
+      value: "opencv"
+    volumeMounts:
+    - name: opencv-code
+      mountPath: /app
+    ports:
+    - containerPort: 8080
+  volumes:
+  - name: opencv-code
+    emptyDir: {}
+
