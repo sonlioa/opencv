@@ -7,7 +7,7 @@ metadata:
 spec:
   containers:
   - name: opencv-container
-    image: dockerfile/opencv-python:latest  # 基礎映像
+    image: sonlioa/opencv-python:latest  # 基礎映像
     command: ["sleep", "infinity"]  # 避免容器啟動後立即退出
     resources:
       limits:
